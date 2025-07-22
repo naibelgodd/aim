@@ -37,7 +37,7 @@ local Window = Rayfield:CreateWindow({
     CurrentValue = false,
     Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
     Callback = function(Value)
-      loadstring(game:HttpGet("https://raw.githubusercontent.com/Stratxgy/StratWare/main/Aimbot.lua"))()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/naibelgodd/aim/main/Aimbot.lua"))()
     end,
  })
 
