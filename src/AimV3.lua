@@ -96,7 +96,7 @@ getgenv().ExunysDeveloperAimbot = {
 	Settings = {
 		Enabled = true,
 
-		TeamCheck = false,
+		TeamCheck = true,
 		AliveCheck = true,
 		WallCheck = false,
 
@@ -109,7 +109,7 @@ getgenv().ExunysDeveloperAimbot = {
 		LockMode = 1, -- 1 = CFrame; 2 = mousemoverel
 		LockPart = "Head", -- Body part to lock on
 
-		TriggerKey = Enum.keycode.Q,
+		TriggerKey = Enum.KeyCode.Q,
 		Toggle = false
 	},
 
