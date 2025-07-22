@@ -2,8 +2,8 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local Window = Rayfield:CreateWindow({
     Name = "StratWare - CounterBlox",
-    LoadingTitle = "Stratxgy on YouTube",
-    LoadingSubtitle = "by Stratxgy",
+    LoadingTitle = "Naibell edit this",
+    LoadingSubtitle = "by naibell",
     ConfigurationSaving = {
        Enabled = true,
        FolderName = nil, -- Create a custom folder for your hub/game
