@@ -1,12 +1,4 @@
- _        _______                    _______  _______ 
-( (    /|(  ____ \|\     /||\     /|(  ____ \/ ___   )
-|  \  ( || (    \/| )   ( |( \   / )| (    \/\/   )  |
-|   \ | || |      | |   | | \ (_) / | (__        /   )
-| (\ \) || | ____ | |   | |  \   /  |  __)      /   / 
-| | \   || | \_  )| |   | |   ) (   | (        /   /  
-| )  \  || (___) || (___) |   | |   | (____/\ /   (_/\
-|/    )_)(_______)(_______)   \_/   (_______/(_______/
-
+--nguyezz recode this
 local game = game
 local assert, loadstring, select, next, type, typeof, pcall, xpcall, setmetatable, getmetatable, tick, warn = assert, loadstring, select, next, type, typeof, pcall, xpcall, setmetatable, getmetatable, tick, warn
 local mathfloor, mathabs, mathcos, mathsin, mathrad, mathdeg, mathmin, mathmax, mathclamp, mathrandom = math.floor, math.abs, math.cos, math.sin, math.rad, math.deg, math.min, math.max, math.clamp, math.random
