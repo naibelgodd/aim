@@ -1,4 +1,9 @@
---// Caching
+               
+  ____   ____  
+ /    \ /  _ \ 
+|   |  (  <_> )
+|___|  /\____/ 
+     \/        
 
 local game = game
 local assert, loadstring, select, next, type, typeof, pcall, xpcall, setmetatable, getmetatable, tick, warn = assert, loadstring, select, next, type, typeof, pcall, xpcall, setmetatable, getmetatable, tick, warn
