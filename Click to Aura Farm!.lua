@@ -6,7 +6,7 @@ local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
 local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "LURKHACKGui"
+screenGui.Name = "Đó Ai NEW SCRIPT"
 screenGui.IgnoreGuiInset = true
 screenGui.Parent = playerGui
 
@@ -25,7 +25,7 @@ local title = Instance.new("TextLabel")
 title.Size = UDim2.new(1, 0, 0, 30)
 title.Position = UDim2.new(0, 0, 0, 5)
 title.BackgroundTransparency = 1
-title.Text = "LURK HACK"
+title.Text = "ĐÓ Ai NEW SCRIPT"
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
 title.TextSize = 20
 title.Font = Enum.Font.GothamBold
@@ -36,7 +36,7 @@ toggleButton.Size = UDim2.new(0.8, 0, 0, 25)
 toggleButton.Position = UDim2.new(0.1, 0, 0, 45)
 toggleButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
 toggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-toggleButton.Text = "Auto Perfect: OFF"
+toggleButton.Text = "tự động chèo: tắt"
 toggleButton.TextSize = 14
 toggleButton.Font = Enum.Font.Gotham
 toggleButton.Parent = mainFrame
@@ -81,7 +81,7 @@ local isToggled = false
 toggleButton.MouseButton1Click:Connect(function()
     isToggled = not isToggled
     if isToggled then
-        toggleButton.Text = "Auto Perfect: ON"
+        toggleButton.Text = "tự động chèo: bật"
         toggleButton.BackgroundColor3 = Color3.fromRGB(0, 200, 0)
         getgenv().farm = true
         spawn(function()
@@ -94,7 +94,7 @@ toggleButton.MouseButton1Click:Connect(function()
             end
         end)
     else
-        toggleButton.Text = "Auto Perfect: OFF"
+        toggleButton.Text = "tự động chèo: tắt"
         toggleButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
         getgenv().farm = false
     end
