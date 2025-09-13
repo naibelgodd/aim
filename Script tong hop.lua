@@ -4,7 +4,7 @@ local Window = Library.CreateLib("Script Tổng Hợp FB: Đó Ai", "DarkTheme")
 local Tab = Window:NewTab("Blox Fruit")
 local Section = Tab:NewSection("Bloxfruit")
 
-Section:NewButton("Redz", "Redz", function()
+Section:NewButton("comming soon!", "Redz", function()
    loadstring(game:HttpGet("https://github.com/LuaCrack/Min/raw/main/MinUp27Vn"))()
 end)
 
@@ -27,6 +27,10 @@ end)
 
 Section:NewButton("NebulaX", "Key need", function()
    loadstring(game:HttpGet("https://rscripts.net/raw/universal-hitbox-v10-open-source_1733529165192_LIstHcFlfK.txt",true))()
+end)
+
+Section:NewButton("keyboard", "keyboard", function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/advxzivhsjjdhxhsidifvsh/mobkeyboard/main/main.txt", true))()
 end)
 
 Section:NewTextBox("NebulaX Key", "Fp1BR4Y6x3", function(txt)
