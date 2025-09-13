@@ -60,3 +60,37 @@ local UniversalTab = Window:CreateTab("Universal", 4483362458) -- Title, Image
    loadstring(game:HttpGet("https://rscripts.net/raw/universal-hitbox-v10-open-source_1733529165192_LIstHcFlfK.txt",true))();
     end,
   })
+
+  local Button = UniversalTab:CreateButton({
+   Name = "NebulaX",----key: Fp1BR4Y6x3
+   Callback = function()
+   loadstring(game:HttpGet("https://gist.githubusercontent.com/user2084375/75fb217f728c5219c96c90ae4b858ea5/raw/7f773e20f38da9799b7c2a3887ba3724d4e82e61/gistfile1.txt"))()    end,
+  })
+
+  local Button = UniversalTab:CreateButton({
+   Name = "NebulaX key",
+   Callback = function()
+   print("Fp1BR4Y6x3")
+    end,
+  })
+
+  local Button = UniversalTab:CreateButton({
+   Name = "Fly Gui V3",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
+    end,
+  })
+
+  local Button = UniversalTab:CreateButton({
+   Name = "Noclip Gui",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/naibelgodd/aim/main/Noclip%20Gui.lua"))();
+    end,
+  })
+
+  local Button = UniversalTab:CreateButton({
+   Name = "Invisible Gui",
+   Callback = function()
+   loadstring(game:HttpGet('https://abre.ai/invisible-v2'))();
+    end,
+  })
