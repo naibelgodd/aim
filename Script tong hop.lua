@@ -26,7 +26,7 @@ Section:NewButton("HitBox", "Push", function()
 end)
 
 Section:NewButton("NebulaX", "Key need", function()
-   loadstring(game:HttpGet("https://rscripts.net/raw/universal-hitbox-v10-open-source_1733529165192_LIstHcFlfK.txt",true))()
+   loadstring(game:HttpGet("https://gist.githubusercontent.com/user2084375/75fb217f728c5219c96c90ae4b858ea5/raw/7f773e20f38da9799b7c2a3887ba3724d4e82e61/gistfile1.txt"))()
 end)
 
 Section:NewButton("keyboard", "keyboard", function()
