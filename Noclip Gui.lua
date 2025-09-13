@@ -31,7 +31,7 @@ title.Text = "by Đó Ai"
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
 title.BackgroundTransparency = 1
 title.Font = Enum.Font.SourceSansBold
-title.TextSize = 20
+title.TextSize = 21
 
 -- Etichetta "noclip"
 local label = Instance.new("TextLabel", frame)
