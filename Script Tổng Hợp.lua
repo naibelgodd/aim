@@ -17,7 +17,7 @@ local Window = Rayfield:CreateWindow({
    ConfigurationSaving = {
       Enabled = true,
       FolderName = nil, -- Create a custom folder for your hub/game
-      FileName = "Đó Ai"
+      FileName = "Big Hub"
    },
 
    Discord = {
@@ -92,5 +92,20 @@ local UniversalTab = Window:CreateTab("Universal", 4483362458) -- Title, Image
    Name = "Invisible Gui",
    Callback = function()
    loadstring(game:HttpGet('https://abre.ai/invisible-v2'))();
+    end,
+  })
+
+  local Button = UniversalTab:CreateButton({
+   Name = "Sky",
+   Callback = function()
+   s = Instance.new("Sky")
+s.Name = "SKY"
+s.SkyboxBk = "http://www.roblox.com/asset/?id=90774749350746"
+s.SkyboxDn = "http://www.roblox.com/asset/?id=126893304944673"
+s.SkyboxFt = "http://www.roblox.com/asset/?id=90774749350746"
+s.SkyboxLf = "http://www.roblox.com/asset/?id=90774749350746"
+s.SkyboxRt = "http://www.roblox.com/asset/?id=90774749350746"
+s.SkyboxUp = "http://www.roblox.com/asset/?id=126893304944673"
+s.Parent = game.Lighting
     end,
   })
