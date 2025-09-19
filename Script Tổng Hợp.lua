@@ -62,9 +62,10 @@ local UniversalTab = Window:CreateTab("Universal", 4483362458) -- Title, Image
   })
 
   local Button = UniversalTab:CreateButton({
-   Name = "NebulaX",----key: Fp1BR4Y6x3
+   Name = "NebulaX",
    Callback = function()
-   loadstring(game:HttpGet("https://gist.githubusercontent.com/user2084375/75fb217f728c5219c96c90ae4b858ea5/raw/7f773e20f38da9799b7c2a3887ba3724d4e82e61/gistfile1.txt"))()    end,
+   loadstring(game:HttpGet("https://gist.githubusercontent.com/user2084375/a10f000d8b1a0aa75c0205feead68083/raw/c96fc1b8f430982b17fcd3390e3020f40300b8f5/gistfile1.txt"))();
+    end,
   })
 
   local Button = UniversalTab:CreateButton({
