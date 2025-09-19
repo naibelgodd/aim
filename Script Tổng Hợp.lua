@@ -69,13 +69,6 @@ local UniversalTab = Window:CreateTab("Universal", 4483362458) -- Title, Image
   })
 
   local Button = UniversalTab:CreateButton({
-   Name = "NebulaX key",
-   Callback = function()
-   print("Fp1BR4Y6x3")
-    end,
-  })
-
-  local Button = UniversalTab:CreateButton({
    Name = "Fly Gui V3",
    Callback = function()
    loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
