@@ -26,21 +26,21 @@ local Window = Rayfield:CreateWindow({
       RememberJoins = true -- Set this to false to make them join the discord every time they load it up
    },
 
-   KeySystem = false, -- Set this to true to use our key system
+   KeySystem = true, -- Set this to true to use our key system
    KeySettings = {
       Title = "Naibell Hub!!",
       Subtitle = "Submit The Key",
       Note = "This is the test version", -- Use this to tell the user how to get a key
       FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
-      SaveKey = false, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
       GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
-      Key = {"naibellhub.lol"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+      Key = {"naibell"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
    }
 })
 
 Rayfield:Notify({
    Title = "Notify",
-   Content = "Thank For Your Using",
+   Content = "Thank For Your Using Naibellhub Beta",
    Duration = 6.5,
    Image = 113664949755202,
 })
@@ -50,6 +50,15 @@ local UniversalTab = Window:CreateTab("Universal", 4483362458) -- Title, Image
   local Button = UniversalTab:CreateButton({
    Name = "EdgeIY",
    Callback = function()
+   s = Instance.new("Sky")
+s.Name = "SKY"
+s.SkyboxBk = "http://www.roblox.com/asset/?id=90774749350746"
+s.SkyboxDn = "http://www.roblox.com/asset/?id=126893304944673"
+s.SkyboxFt = "http://www.roblox.com/asset/?id=90774749350746"
+s.SkyboxLf = "http://www.roblox.com/asset/?id=90774749350746"
+s.SkyboxRt = "http://www.roblox.com/asset/?id=90774749350746"
+s.SkyboxUp = "http://www.roblox.com/asset/?id=126893304944673"
+s.Parent = game.Lighting
    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))();
     end,
   })
@@ -57,6 +66,15 @@ local UniversalTab = Window:CreateTab("Universal", 4483362458) -- Title, Image
   local Button = UniversalTab:CreateButton({
    Name = "Hitbox Note: Very op XD",
    Callback = function()
+   s = Instance.new("Sky")
+s.Name = "SKY"
+s.SkyboxBk = "http://www.roblox.com/asset/?id=90774749350746"
+s.SkyboxDn = "http://www.roblox.com/asset/?id=126893304944673"
+s.SkyboxFt = "http://www.roblox.com/asset/?id=90774749350746"
+s.SkyboxLf = "http://www.roblox.com/asset/?id=90774749350746"
+s.SkyboxRt = "http://www.roblox.com/asset/?id=90774749350746"
+s.SkyboxUp = "http://www.roblox.com/asset/?id=126893304944673"
+s.Parent = game.Lighting
    loadstring(game:HttpGet("https://rscripts.net/raw/universal-hitbox-v10-open-source_1733529165192_LIstHcFlfK.txt",true))();
     end,
   })
@@ -64,6 +82,15 @@ local UniversalTab = Window:CreateTab("Universal", 4483362458) -- Title, Image
   local Button = UniversalTab:CreateButton({
    Name = "NebulaX",
    Callback = function()
+   s = Instance.new("Sky")
+s.Name = "SKY"
+s.SkyboxBk = "http://www.roblox.com/asset/?id=90774749350746"
+s.SkyboxDn = "http://www.roblox.com/asset/?id=126893304944673"
+s.SkyboxFt = "http://www.roblox.com/asset/?id=90774749350746"
+s.SkyboxLf = "http://www.roblox.com/asset/?id=90774749350746"
+s.SkyboxRt = "http://www.roblox.com/asset/?id=90774749350746"
+s.SkyboxUp = "http://www.roblox.com/asset/?id=126893304944673"
+s.Parent = game.Lighting
    loadstring(game:HttpGet("https://gist.githubusercontent.com/user2084375/a10f000d8b1a0aa75c0205feead68083/raw/c96fc1b8f430982b17fcd3390e3020f40300b8f5/gistfile1.txt"))();
     end,
   })
@@ -71,6 +98,15 @@ local UniversalTab = Window:CreateTab("Universal", 4483362458) -- Title, Image
   local Button = UniversalTab:CreateButton({
    Name = "Fly Gui V3",
    Callback = function()
+   s = Instance.new("Sky")
+s.Name = "SKY"
+s.SkyboxBk = "http://www.roblox.com/asset/?id=90774749350746"
+s.SkyboxDn = "http://www.roblox.com/asset/?id=126893304944673"
+s.SkyboxFt = "http://www.roblox.com/asset/?id=90774749350746"
+s.SkyboxLf = "http://www.roblox.com/asset/?id=90774749350746"
+s.SkyboxRt = "http://www.roblox.com/asset/?id=90774749350746"
+s.SkyboxUp = "http://www.roblox.com/asset/?id=126893304944673"
+s.Parent = game.Lighting
    loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
     end,
   })
@@ -78,6 +114,15 @@ local UniversalTab = Window:CreateTab("Universal", 4483362458) -- Title, Image
   local Button = UniversalTab:CreateButton({
    Name = "Noclip Gui",
    Callback = function()
+   s = Instance.new("Sky")
+s.Name = "SKY"
+s.SkyboxBk = "http://www.roblox.com/asset/?id=90774749350746"
+s.SkyboxDn = "http://www.roblox.com/asset/?id=126893304944673"
+s.SkyboxFt = "http://www.roblox.com/asset/?id=90774749350746"
+s.SkyboxLf = "http://www.roblox.com/asset/?id=90774749350746"
+s.SkyboxRt = "http://www.roblox.com/asset/?id=90774749350746"
+s.SkyboxUp = "http://www.roblox.com/asset/?id=126893304944673"
+s.Parent = game.Lighting
    loadstring(game:HttpGet("https://raw.githubusercontent.com/naibelgodd/aim/main/Noclip%20Gui.lua"))();
     end,
   })
@@ -85,6 +130,15 @@ local UniversalTab = Window:CreateTab("Universal", 4483362458) -- Title, Image
   local Button = UniversalTab:CreateButton({
    Name = "Invisible Gui",
    Callback = function()
+   s = Instance.new("Sky")
+s.Name = "SKY"
+s.SkyboxBk = "http://www.roblox.com/asset/?id=90774749350746"
+s.SkyboxDn = "http://www.roblox.com/asset/?id=126893304944673"
+s.SkyboxFt = "http://www.roblox.com/asset/?id=90774749350746"
+s.SkyboxLf = "http://www.roblox.com/asset/?id=90774749350746"
+s.SkyboxRt = "http://www.roblox.com/asset/?id=90774749350746"
+s.SkyboxUp = "http://www.roblox.com/asset/?id=126893304944673"
+s.Parent = game.Lighting
    loadstring(game:HttpGet('https://abre.ai/invisible-v2'))();
     end,
   })
@@ -101,5 +155,13 @@ s.SkyboxLf = "http://www.roblox.com/asset/?id=90774749350746"
 s.SkyboxRt = "http://www.roblox.com/asset/?id=90774749350746"
 s.SkyboxUp = "http://www.roblox.com/asset/?id=126893304944673"
 s.Parent = game.Lighting
+    end,
+  })
+
+  local Button = UniversalTab:CreateButton({
+   Name = "jobid",
+   Callback = function()
+   setclipboard(game.JobId)
+   print("Copy JobId Rồi Nha Ní:", game.JobId);
     end,
   })
