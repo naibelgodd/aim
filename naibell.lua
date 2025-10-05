@@ -18,21 +18,17 @@
     ✨Universal Aim Assist Framework✨
     Release 1.9.5
 
-    twix.cyou/pix
-    twix.cyou/OpenAimbotV3rm
+    Author: naibell
+    License: Naibell
+    GitHub: https://github.com/naibelgodd/aim/main/naibell.lua
 
-    Author: ttwiz_z (ttwizz) <i@twix.cyou>
-    License: MIT
-    GitHub: https://github.com/ttwizz/Open-Aimbot
+    Issues: https://github.com/naibelgodd/aim/blob/main/naibell.lua
+    Pull requests: https://github.com/naibelgodd/aim/blob/main/ESP.lua
+    Discussions: https://github.com/naibelgodd/aim/blob/main/RecodeWave.lua
 
-    Issues: https://github.com/ttwizz/Open-Aimbot/issues
-    Pull requests: https://github.com/ttwizz/Open-Aimbot/pulls
-    Discussions: https://github.com/ttwizz/Open-Aimbot/discussions
+    Wiki: nope
 
-    Wiki: https://moderka.org/Open-Aimbot
-
-    Trustpilot: https://www.trustpilot.com/review/moderka.org
-
+    Trustpilot: nope
 •───────•°•❀•°•───────•୧‿̩͙ ˖︵ꕀ ⠀𓏶 ̣̣̥⠀ ꕀ︵˖ ̩͙‿୨•───────•°•❀•°•───────•]]
 
 
