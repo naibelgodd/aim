@@ -96,7 +96,7 @@ getgenv().ExunysDeveloperAimbot = {
 	Settings = {
 		Enabled = true,
 
-		TeamCheck = true,
+		TeamCheck = false,
 		AliveCheck = true,
 		WallCheck = false,
 
@@ -125,7 +125,7 @@ getgenv().ExunysDeveloperAimbot = {
 		Filled = false,
 
 		RainbowColor = false,
-		RainbowOutlineColor = false,
+		RainbowOutlineColor = true,
 		Color = Color3fromRGB(255, 255, 255),
 		OutlineColor = Color3fromRGB(0, 0, 0),
 		LockedColor = Color3fromRGB(255, 150, 150)
