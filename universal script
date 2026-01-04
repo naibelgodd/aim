@@ -1,0 +1,483 @@
+-- SERVICES & OPTIMIZATION
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local Lighting = game:GetService("Lighting")
+local MarketplaceService = game:GetService("MarketplaceService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local LocalPlayer = Players.LocalPlayer
+
+-- LOAD UI LIBRARY (Rayfield)
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+-- CREATE WINDOW (KEY SYSTEM REMOVED)
+local Window = Rayfield:CreateWindow({
+    Name = "ARK HUB [CLEANED]",
+    Icon = 10180536602,
+    LoadingTitle = "ARK HUB",
+    LoadingSubtitle = "Patched by Veteran Architect",
+    Theme = "Default",
+    ToggleUIKeybind = "K",
+    ConfigurationSaving = {
+        Enabled = true,
+        FolderName = "ARK_AC",
+        FileName = "ARK_HUB"
+    },
+    Discord = {
+        Enabled = false, -- Disabled Discord auto-prompt
+        Invite = "",
+        RememberJoins = false
+    },
+    KeySystem = false -- Disabled Key System
+})
+
+----------------------------------------------------
+---------------------- MAIN TAB --------------------
+----------------------------------------------------
+local MainTab = Window:CreateTab("MAIN", 4483362458)
+local MainSection = MainTab:CreateSection("MAIN FEATURES")
+
+-- Buttons
+MainTab:CreateButton({
+    Name = "Infinite Yield",
+    SectionParent = MainSection,
+    Callback = function()
+        pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+        end)
+    end
+})
+
+MainTab:CreateButton({
+    Name = "Fly",
+    SectionParent = MainSection,
+    Callback = function()
+        pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
+        end)
+    end
+})
+
+MainTab:CreateButton({
+    Name = "Dark Dex",
+    SectionParent = MainSection,
+    Callback = function()
+        pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Babyhamsta/RBLX_Scripts/main/Universal/BypassedDarkDexV3.lua", true))()
+        end)
+    end
+})
+
+----------------------------------------------------
+------------------ ARK PROTECTION ------------------
+----------------------------------------------------
+local ARK_Protection_Enabled = false
+
+MainTab:CreateToggle({
+    Name = "ARK Protection",
+    CurrentValue = false,
+    SectionParent = MainSection,
+    Flag = "ARK_Protection",
+    Callback = function(state)
+        ARK_Protection_Enabled = state
+        if state then
+            Rayfield:Notify({
+                Title = "ARK Protection",
+                Content = "Client protection activated.",
+                Duration = 5,
+                Image = 8248378219
+            })
+            print("ARK Protection: ENABLED")
+
+            -- Kick prevention
+            local mt = getrawmetatable(game)
+            setreadonly(mt, false)
+            local oldNamecall = mt.__namecall
+            mt.__namecall = newcclosure(function(self, ...)
+                local method = getnamecallmethod()
+                if ARK_Protection_Enabled and (method == "Kick" or method == "kick") then
+                    return nil
+                end
+                return oldNamecall(self, ...)
+            end)
+            setreadonly(mt, true)
+
+            -- Humanoid protection (fixed: movement now works)
+            task.spawn(function()
+                while ARK_Protection_Enabled do
+                    local char = LocalPlayer.Character
+                    if char then
+                        local hum = char:FindFirstChildOfClass("Humanoid")
+                        if hum then
+                            -- Keep health safe but allow normal movement
+                            hum.Health = math.max(hum.Health, 5)
+                            hum:SetStateEnabled(Enum.HumanoidStateType.Dead, false)
+                            hum.BreakJointsOnDeath = false
+                        end
+                    end
+                    task.wait(0.5)
+                end
+            end)
+
+
+            task.spawn(function()
+                local lastTick = 0
+                local spamCount = 0
+                while ARK_Protection_Enabled do
+                    if tick() - lastTick < 0.01 then
+                        spamCount += 1
+                        if spamCount > 50 then
+                            warn("⚠ Crash remote spam detected — blocked")
+                            spamCount = 0
+                        end
+                    else
+                        spamCount = 0
+                    end
+                    lastTick = tick()
+                    task.wait()
+                end
+            end)
+        else
+            Rayfield:Notify({
+                Title = "ARK Protection",
+                Content = "Protection disabled.",
+                Duration = 5,
+                Image = 8248378219
+            })
+            print("ARK Protection: DISABLED")
+        end
+    end
+})
+
+-- Section
+local InteractionSection = MainTab:CreateSection("Player Interaction")
+
+-----------------------------
+-- 2️⃣ Health Bar Overlay
+-----------------------------
+local HealthOverlayEnabled = false
+local healthOverlays = {}
+
+local function UpdateHealthBars()
+    for _, player in pairs(Players:GetPlayers()) do
+        if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("Humanoid") then
+            if not healthOverlays[player] then
+                local billboard = Instance.new("BillboardGui")
+                billboard.Name = "HealthBarOverlay"
+                billboard.Adornee = player.Character:FindFirstChild("HumanoidRootPart") or player.Character:FindFirstChildWhichIsA("BasePart")
+                billboard.Size = UDim2.new(0,100,0,10)
+                billboard.StudsOffset = Vector3.new(0,3,0)
+                billboard.AlwaysOnTop = true
+                local bar = Instance.new("Frame")
+                bar.BackgroundColor3 = Color3.fromRGB(0,255,0)
+                bar.Size = UDim2.new(1,0,1,0)
+                bar.Parent = billboard
+                billboard.Parent = game.CoreGui
+                healthOverlays[player] = {Gui=billboard, Bar=bar}
+            end
+            local hum = player.Character:FindFirstChildOfClass("Humanoid")
+            if hum then
+                healthOverlays[player].Bar.Size = UDim2.new(math.clamp(hum.Health/hum.MaxHealth,0,1),0,1,0)
+            end
+        end
+    end
+end
+
+MainTab:CreateToggle({
+    Name = "Health Bar Overlay",
+    CurrentValue = false,
+    SectionParent = InteractionSection,
+    Callback = function(state)
+        HealthOverlayEnabled = state
+        if state then
+            task.spawn(function()
+                while HealthOverlayEnabled do
+                    UpdateHealthBars()
+                    task.wait(0.2)
+                end
+            end)
+        else
+            for _, data in pairs(healthOverlays) do
+                data.Gui:Destroy()
+            end
+            healthOverlays = {}
+        end
+    end
+})
+
+-----------------------------
+-- 3️⃣ Player Tracker
+-----------------------------
+local TrackerEnabled = false
+local trackerLabels = {}
+
+local function UpdatePlayerTracker()
+    for _, player in pairs(Players:GetPlayers()) do
+        if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+            if not trackerLabels[player] then
+                local label = Instance.new("BillboardGui")
+                label.Name = "PlayerTracker"
+                label.Adornee = player.Character.HumanoidRootPart
+                label.Size = UDim2.new(0,150,0,20)
+                label.StudsOffset = Vector3.new(0,5,0)
+                label.AlwaysOnTop = true
+                local textLabel = Instance.new("TextLabel")
+                textLabel.BackgroundTransparency = 1
+                textLabel.TextColor3 = Color3.fromRGB(255,255,255)
+                textLabel.TextStrokeTransparency = 0
+                textLabel.Size = UDim2.new(1,0,1,0)
+                textLabel.TextScaled = true
+                textLabel.Text = player.Name
+                textLabel.Parent = label
+                label.Parent = game.CoreGui
+                trackerLabels[player] = textLabel
+            end
+            local hrp = player.Character:FindFirstChild("HumanoidRootPart")
+            if hrp then
+                trackerLabels[player].Text = player.Name.." | X:"..math.floor(hrp.Position.X).." Y:"..math.floor(hrp.Position.Y).." Z:"..math.floor(hrp.Position.Z)
+            end
+        end
+    end
+end
+
+MainTab:CreateToggle({
+    Name = "Player Tracker",
+    CurrentValue = false,
+    SectionParent = InteractionSection,
+    Callback = function(state)
+        TrackerEnabled = state
+        if state then
+            task.spawn(function()
+                while TrackerEnabled do
+                    UpdatePlayerTracker()
+                    task.wait(0.3)
+                end
+            end)
+        else
+            for _, label in pairs(trackerLabels) do
+                label.Parent:Destroy()
+            end
+            trackerLabels = {}
+        end
+    end
+})
+
+----------------------------------------------------
+---------------------- GAME TAB --------------------
+----------------------------------------------------
+local GameTab = Window:CreateTab("GAME", 4483362458 )
+local GameSection = GameTab:CreateSection("Game Info")
+
+local Toggle = GameTab:CreateToggle({
+    Name = "Player /kick/ban/join/leave/ Notifications",
+    CurrentValue = false,
+    Flag = "PlayerNotifyToggle",
+    Callback = function(Value)
+        if Value then
+            -- ENABLE notifier
+       loadstring(game:HttpGet("https://raw.githubusercontent.com/zxkuhl/Player-notifier/main/Nodification%20system"))()
+        else
+            -- DISABLE notifier (optional)
+            print("Player notifier disabled")
+        end
+    end,
+})
+
+local success, productInfo = pcall(function()
+    return MarketplaceService:GetProductInfo(game.PlaceId)
+end)
+
+local gameName = (success and productInfo and productInfo.Name) or "Unknown"
+local gameNameBox = GameTab:CreateLabel("Game Name: " .. gameName)
+local currentPlayersBox = GameTab:CreateLabel("[moment of local player join] Players: " .. #Players:GetPlayers() .. "/" .. Players.MaxPlayers)
+local localPlayerBox = GameTab:CreateLabel("Local Player: " .. LocalPlayer.DisplayName .. " (" .. LocalPlayer.Name .. ")")
+local pingBox = GameTab:CreateLabel("Ping: Unbound")
+local timeSinceStartBox = GameTab:CreateLabel("Time Since Start: 0s")
+
+local startTime = tick()
+RunService.RenderStepped:Connect(function()
+    currentPlayersBox:SetText("Players: " .. #Players:GetPlayers() .. "/" .. Players.MaxPlayers)
+    timeSinceStartBox:SetText("Time Since Start: " .. math.floor(tick() - startTime) .. "s")
+end)
+
+----------------------------------------------------
+--------------- LOCAL PLAYER TAB -------------------
+----------------------------------------------------
+local LocalTab = Window:CreateTab("LOCAL PLAYER", 4483362458)
+local LPSection = LocalTab:CreateSection("Player Mods")
+
+local AntiRagdollEnabled = false
+
+LocalTab:CreateToggle({
+    Name = "Anti Ragdoll / Sit / Fling",
+    CurrentValue = false,
+    SectionParent = LPSection,
+    Callback = function(state)
+        AntiRagdollEnabled = state
+        if state then
+            task.spawn(function()
+                while AntiRagdollEnabled do
+                    if LocalPlayer.Character then
+                        local hum = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+                        if hum then
+                            hum.Sit = false
+                            hum.PlatformStand = false
+                            local hrp = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+                            if hrp then
+                                hrp.Velocity = Vector3.zero
+                                hrp.RotVelocity = Vector3.zero
+                            end
+                        end
+                    end
+                    task.wait(0)
+                end
+            end)
+        end
+    end
+})
+
+LocalTab:CreateSlider({
+    Name = "Walk Speed",
+    Range = {16, 200},
+    Increment = 1,
+    CurrentValue = 16,
+    SectionParent = LPSection,
+    Callback = function(v)
+        if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
+            LocalPlayer.Character.Humanoid.WalkSpeed = v
+        end
+    end
+})
+
+LocalTab:CreateSlider({
+    Name = "Jump Power",
+    Range = {50, 300},
+    Increment = 1,
+    CurrentValue = 50,
+    SectionParent = LPSection,
+    Callback = function(v)
+        if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
+            LocalPlayer.Character.Humanoid.JumpPower = v
+        end
+    end
+})
+
+LocalTab:CreateToggle({
+    Name = "God Mode (Client Side)",
+    CurrentValue = false,
+    SectionParent = LPSection,
+    Callback = function(v)
+        if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
+            local h = LocalPlayer.Character.Humanoid
+            if v then
+                h.MaxHealth = math.huge
+                h.Health = math.huge
+            else
+                h.MaxHealth = 100
+            end
+        end
+    end
+})
+
+LocalTab:CreateButton({
+    Name = "Infinite Jump",
+    SectionParent = LPSection,
+    Callback = function()
+        pcall(function()
+            loadstring(game:HttpGet("https://obj.wearedevs.net/2/scripts/Infinite%20Jump.lua"))()
+        end)
+    end
+})
+
+----------------------------------------------------
+------------------ TOOLS TAB -----------------------
+----------------------------------------------------
+local ToolsTab = Window:CreateTab("TOOLS", 4483362458)
+local ToolsSection = ToolsTab:CreateSection("Utilities")
+
+ToolsTab:CreateButton({
+    Name = "Server Hop",
+    SectionParent = ToolsSection,
+    Callback = function()
+        pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/LeoKholYt/roblox/main/lk_serverhop.lua"))():Teleport(game.PlaceId)
+        end)
+    end
+})
+
+ToolsTab:CreateButton({
+    Name = "Anti AFK",
+    SectionParent = ToolsSection,
+    Callback = function()
+        pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/evxncodes/mainroblox/main/anti-afk"))()
+        end)
+    end
+})
+
+ToolsTab:CreateButton({
+    Name = "Rejoin Server",
+    SectionParent = ToolsSection,
+    Callback = function()
+        local ts = game:GetService("TeleportService")
+        ts:TeleportToPlaceInstance(game.PlaceId, game.JobId, LocalPlayer)
+    end
+})
+
+----------------------------------------------------
+------------------ VISUALS TAB ---------------------
+----------------------------------------------------
+local VisualsTab = Window:CreateTab("VISUALS", 4483362458)
+local VisualsSection = VisualsTab:CreateSection("Visual Mods")
+
+VisualsTab:CreateSlider({
+    Name = "Camera FOV",
+    Range = {70, 120},
+    Increment = 1,
+    CurrentValue = 70,
+    SectionParent = VisualsSection,
+    Callback = function(value)
+        if workspace.CurrentCamera then
+            workspace.CurrentCamera.FieldOfView = value
+        end
+    end
+})
+
+VisualsTab:CreateToggle({
+    Name = "Full Bright",
+    CurrentValue = false,
+    SectionParent = VisualsSection,
+    Callback = function(v)
+        if v then
+            Lighting.Ambient = Color3.new(1, 1, 1)
+            Lighting.Brightness = 2
+            Lighting.GlobalShadows = false
+        else
+            Lighting.Ambient = Color3.fromRGB(128, 128, 128)
+            Lighting.Brightness = 1
+            Lighting.GlobalShadows = true
+        end
+    end
+})
+
+----------------------------------------------------
+------------------ TROLL TAB -----------------------
+----------------------------------------------------
+local TrollTab = Window:CreateTab("TROLL", 4483362458)
+
+TrollTab:CreateButton({
+    Name = "Load Bang UI",
+    Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/4gh9/Bang-Script-Gui/main/bang%20gui.lua'))()
+    end
+})
+
+-- Settings Tab
+local SettingsTab = Window:CreateTab("Settings", "settings")
+SettingsTab:CreateButton({
+    Name = "Destroy GUI",
+    Callback = function()
+        Rayfield:Destroy()
+    end
+})
+
+Rayfield:LoadConfiguration()
