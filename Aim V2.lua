@@ -621,33 +621,60 @@ miscSec:CreateButton({
 miscSec:CreateButton({
     Name = "Super Fast Mode (Xóa sạch Texture, Decal, Hiệu ứng)", 
     Callback = function()
-        Lighting.GlobalShadows = false
-        Lighting.FogEnd = 9e9
-        settings().Rendering.QualityLevel = 1
-        
-        for _, v in pairs(Lighting:GetChildren()) do
-            if v:IsA("PostEffect") or v:IsA("Atmosphere") or v:IsA("Sky") or v:IsA("Clouds") or v:IsA("BloomEffect") or v:IsA("BlurEffect") or v:IsA("ColorCorrectionEffect") or v:IsA("SunRaysEffect") then
-                v:Destroy()
-            end
-        end
+        -- Tách ra luồng riêng để không chặn (block) Main Thread làm treo UI
+        task.spawn(function()
+            UI:Notify({Title="Super Fast Mode", Content="Đang ép xung hệ thống... Vui lòng đợi vài giây!"})
 
-        if workspace:FindFirstChild("Terrain") then
-            workspace.Terrain.Decoration = false
-            workspace.Terrain.WaterWaveSize = 0
-            workspace.Terrain.WaterWaveSpeed = 0
-            workspace.Terrain.WaterReflectance = 0
-            workspace.Terrain.WaterTransparency = 0
-        end
+            local Lighting = game:GetService("Lighting")
+            local Terrain = workspace:FindFirstChildOfClass("Terrain")
 
-        for _, v in pairs(workspace:GetDescendants()) do
-            if v:IsA("BasePart") and not v.Parent:FindFirstChild("Humanoid") then
-                v.Material = Enum.Material.SmoothPlastic
-                v.CastShadow = false
-            elseif v:IsA("Texture") or v:IsA("Decal") or v:IsA("ParticleEmitter") or v:IsA("Trail") or v:IsA("Sparkles") or v:IsA("Smoke") or v:IsA("Fire") then
-                v:Destroy()
+            Lighting.GlobalShadows = false
+            Lighting.FogEnd = 9e9
+            settings().Rendering.QualityLevel = 1
+            
+            -- Trick của lão làng: Ép công nghệ render về mức thấp nhất (Cần executor hỗ trợ sethiddenproperty)
+            pcall(function()
+                sethiddenproperty(Lighting, "Technology", Enum.Technology.Compatibility)
+            end)
+            
+            -- Dọn dẹp Lighting
+            for _, v in pairs(Lighting:GetChildren()) do
+                if v:IsA("PostEffect") or v:IsA("Atmosphere") or v:IsA("Sky") or v:IsA("Clouds") or v:IsA("BloomEffect") or v:IsA("BlurEffect") or v:IsA("ColorCorrectionEffect") or v:IsA("SunRaysEffect") then
+                    v:Destroy()
+                end
             end
-        end
-        UI:Notify({Title="Super Fast Mode", Content="Potato PC mode activated!"})
+
+            -- Dọn dẹp Terrain
+            if Terrain then
+                Terrain.Decoration = false
+                Terrain.WaterWaveSize = 0
+                Terrain.WaterWaveSpeed = 0
+                Terrain.WaterReflectance = 0
+                Terrain.WaterTransparency = 0
+            end
+
+            -- TỐI ƯU HÓA VÒNG LẶP: Dùng ipairs cho mảng và Yielding
+            local descendants = workspace:GetDescendants()
+            local batchSize = 1000 -- Cứ xử lý 1000 parts thì nghỉ 1 frame
+            
+            for i, v in ipairs(descendants) do
+                -- Tránh treo game bằng cách nhường luồng (Yielding)
+                if i % batchSize == 0 then
+                    task.wait()
+                end
+
+                pcall(function()
+                    if v:IsA("BasePart") and not v.Parent:FindFirstChild("Humanoid") then
+                        v.Material = Enum.Material.SmoothPlastic
+                        v.CastShadow = false
+                    elseif v:IsA("Texture") or v:IsA("Decal") or v:IsA("ParticleEmitter") or v:IsA("Trail") or v:IsA("Sparkles") or v:IsA("Smoke") or v:IsA("Fire") then
+                        v:Destroy()
+                    end
+                end)
+            end
+
+            UI:Notify({Title="Super Fast Mode", Content="Hoàn tất! Cấu hình khoai tây đã kích hoạt mượt mà."})
+        end)
     end
 })
 
