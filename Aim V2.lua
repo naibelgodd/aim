@@ -109,7 +109,7 @@ local UI = Atlas.new({
     UseLoader = false, -- Phải để true để hiện bảng nhập Key
     FullName = "Aimbot Recode V36",
     CheckKey = function(inputtedKey)
-        local secretKey = "w"
+        local secretKey = "betav2"
         if inputtedKey == secretKey then
             return true
         else
